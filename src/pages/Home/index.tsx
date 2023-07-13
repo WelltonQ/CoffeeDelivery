@@ -1,3 +1,9 @@
+import { Banner } from '../../components/Banner'
+
 export function Home() {
-  return <div>Início</div>
+  return (
+    <div>
+      <Banner />
+    </div>
+  )
 }
