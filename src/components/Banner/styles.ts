@@ -19,42 +19,49 @@ export const BannerContainer = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: absolute;
-  left: 0;
-  padding: 0 160px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  div.intro {
-    max-width: 588px;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
 
-    h1 {
-      font-size: 48px;
-      font-weight: bold;
-      color: ${({ theme }) => theme['base-title']};
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      font-family: 'Baloo 2', cursive;
-      line-height: 1.2;
-    }
+    div.intro {
+      max-width: 588px;
 
-    > p {
-      font-size: 20px;
-      margin-top: 8px;
-      margin-bottom: 12px;
-    }
-
-    div.demonstrative {
-      display: flex;
-
-      .left .right {
-        display: flex;
-        flex-direction: column;
+      h1 {
+        font-size: 48px;
+        font-weight: bold;
+        color: ${({ theme }) => theme['base-title']};
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: 'Baloo 2', cursive;
+        line-height: 1.2;
       }
 
-      .left {
-        margin-right: 40px;
+      > p {
+        font-size: 20px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+      }
+
+      div.demonstrative {
+        display: flex;
+
+        .left .right {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .left {
+          margin-right: 40px;
+        }
       }
     }
   }
@@ -66,17 +73,14 @@ export const IconContainer = styled.div<IconContainerProps>`
   margin: 20px 0;
   gap: 12px;
 
-  svg {
+  .backgroundIcons {
+    background-color: ${(props) => props.theme[props.variant]};
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    padding: 8px;
-
-    ${(props) => {
-      return `
-        background-color: ${props.theme[props.variant]};
-      `
-    }}
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   p {

@@ -13,9 +13,9 @@ export function Header() {
           <MapPin weight="fill" size={22} />
           <span>Porto Alegre, RS</span>
         </div>
-        <div className="cart">
+        <button className="cart">
           <ShoppingCart weight="fill" size={22} />
-        </div>
+        </button>
       </nav>
     </HeaderContainer>
   )
