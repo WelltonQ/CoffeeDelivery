@@ -20,15 +20,16 @@ export const CardMenu = styled.div`
 
   .taste {
     margin: 10px 0;
+    display: flex;
+    gap: 4px;
 
     span {
       background-color: ${(props) => props.theme['base-yellow-light']};
       color: ${(props) => props.theme['base-yellow-dark']};
-      padding: 5px 10px;
+      padding: 5px 7px;
       border-radius: 20px;
       font-weight: bold;
       font-size: 14px;
-      margin: 0 3px;
       text-transform: uppercase;
     }
   }

@@ -10,6 +10,10 @@ export const HeaderContainer = styled.div`
   max-width: 1140px;
   margin: 0 auto;
 
+  > a:focus {
+    box-shadow: none;
+  }
+
   nav {
     display: flex;
     align-items: center;
