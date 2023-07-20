@@ -15,13 +15,13 @@ export function Banner() {
           </p>
           <div className="demonstrative">
             <div className="left">
-              <IconContainer className="example" variant="base-yellow-dark">
+              <IconContainer variant="base-yellow-dark">
                 <div className="backgroundIcons">
                   <ShoppingCart weight="fill" size={16} color="white" />
                 </div>
                 <p>Compra simples e segura</p>
               </IconContainer>
-              <IconContainer className="example" variant="base-yellow">
+              <IconContainer variant="base-yellow">
                 <div className="backgroundIcons">
                   <Timer weight="fill" color="white" />
                 </div>
@@ -29,13 +29,13 @@ export function Banner() {
               </IconContainer>
             </div>
             <div className="right">
-              <IconContainer className="example" variant="base-text">
+              <IconContainer variant="base-text">
                 <div className="backgroundIcons">
                   <Package weight="fill" color="white" />
                 </div>
                 <p>Embalagem mantém o café intacto</p>
               </IconContainer>
-              <IconContainer className="example" variant="base-purple">
+              <IconContainer variant="base-purple">
                 <div className="backgroundIcons">
                   <Coffee weight="fill" color="white" />
                 </div>
