@@ -62,6 +62,35 @@ export const BannerContainer = styled.div`
         .left {
           margin-right: 40px;
         }
+
+        @media (max-width: 549px) {
+          flex-wrap: wrap;
+          .right {
+            margin-top: -20px;
+          }
+        }
+      }
+
+      @media (max-width: 1160px) {
+        h1 {
+          font-size: 32px;
+        }
+
+        > p {
+          font-size: 14px;
+        }
+      }
+    }
+
+    @media (max-width: 1160px) {
+      img {
+        width: 360px;
+      }
+    }
+    @media (max-width: 800px) {
+      justify-content: center;
+      img {
+        display: none;
       }
     }
   }
@@ -85,5 +114,11 @@ export const IconContainer = styled.div<IconContainerProps>`
 
   p {
     font-size: 16px;
+  }
+
+  @media (max-width: 1160px) {
+    p {
+      font-size: 14px;
+    }
   }
 `

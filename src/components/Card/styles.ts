@@ -81,6 +81,8 @@ export const CardMenu = styled.div`
       background-color: ${(props) => props.theme['base-button']};
       border: none;
       cursor: pointer;
+      margin-bottom: -3px;
+      box-shadow: none;
 
       &:hover {
         color: ${(props) => props.theme['base-purple-dark']};

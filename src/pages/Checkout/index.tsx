@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   MapPinLine,
   Minus,
@@ -26,6 +27,8 @@ import expresso from '../../assets/images/expresso.png'
 import americano from '../../assets/images/americano.png'
 
 export function Checkout() {
+  const [isSelected, setIsSelected] = useState('')
+
   return (
     <CheckoutContainer>
       <div className="completedOrder">
@@ -65,18 +68,27 @@ export function Checkout() {
             </div>
           </div>
           <PaymentsMethods>
-            <div>
+            <button
+              className={isSelected === 'credit' ? 'selected' : ''}
+              onClick={() => setIsSelected('credit')}
+            >
               <CreditCard size={20} />
-              <p>Cartão de Crédito</p>
-            </div>
-            <div>
+              Cartão de Crédito
+            </button>
+            <button
+              className={isSelected === 'debit' ? 'selected' : ''}
+              onClick={() => setIsSelected('debit')}
+            >
               <Bank size={20} />
-              <p>Cartão de Débito</p>
-            </div>
-            <div>
+              Cartão de Débito
+            </button>
+            <button
+              className={isSelected === 'money' ? 'selected' : ''}
+              onClick={() => setIsSelected('money')}
+            >
               <Money size={20} />
-              <p>Dinheiro</p>
-            </div>
+              Dinheiro
+            </button>
           </PaymentsMethods>
         </CheckoutContent>
       </div>

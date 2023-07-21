@@ -117,6 +117,7 @@ export const CheckoutSummary = styled(baseCheckout)`
 const inputBase = styled.input`
   background-color: ${(props) => props.theme['base-input']};
   border: 1px solid ${(props) => props.theme['base-button']};
+  color: ${(props) => props.theme['base-text']};
   border-radius: 4px;
   display: flex;
   height: 42px;
@@ -146,33 +147,42 @@ export const PaymentsMethods = styled.div`
   width: 100%;
   gap: 12px;
 
-  div {
+  button {
     background-color: ${(props) => props.theme['base-button']};
     flex: 1;
     height: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 32px;
     border-radius: 6px;
     min-width: 165px;
-
-    :hover {
-      background-color: ${(props) => props.theme['base-hover']};
-      cursor: pointer;
-
-      svg {
-        color: ${(props) => props.theme['base-purple-dark']};
-      }
-    }
+    color: ${(props) => props.theme['base-text']};
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: none;
 
     svg {
       color: ${(props) => props.theme['base-purple']};
     }
 
-    p {
-      color: ${(props) => props.theme['base-text']};
-      font-size: 14px;
-      text-transform: uppercase;
+    :hover {
+      background-color: ${(props) => props.theme['base-hover']};
+
+      svg {
+        color: ${(props) => props.theme['base-purple-dark']};
+      }
+    }
+  }
+
+  .selected {
+    background-color: ${(props) => props.theme['base-purple-light']};
+    border: 1px solid ${(props) => props.theme['base-purple']};
+
+    :hover {
+      background-color: ${(props) => props.theme['base-purple-light']};
     }
   }
 `

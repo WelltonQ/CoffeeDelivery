@@ -44,9 +44,7 @@ export function Banner() {
             </div>
           </div>
         </div>
-        <div>
-          <img src={coffeeCup} alt="imagem demonstrativa do copo de café" />
-        </div>
+        <img src={coffeeCup} alt="imagem demonstrativa do copo de café" />
       </div>
     </BannerContainer>
   )

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ShoppingCart, Minus, Plus } from 'phosphor-react'
 
 import { CardMenu } from './styles'
@@ -24,6 +25,7 @@ const MockCoffees = [
     title: 'Expresso Tradicional',
     description: 'O tradicional café feito com água quente e grãos moídos',
     price: '9,90',
+    count: 0,
     image: expresso,
   },
   {
@@ -32,6 +34,7 @@ const MockCoffees = [
     title: 'Expresso Americano',
     description: 'Expresso diluído, menos intenso que o tradicional',
     price: '9,90',
+    count: 0,
     image: americano,
   },
   {
@@ -40,6 +43,7 @@ const MockCoffees = [
     title: 'Expresso Cremoso',
     description: 'Café expresso tradicional com espuma cremosa',
     price: '9,90',
+    count: 0,
     image: cremoso,
   },
   {
@@ -48,6 +52,7 @@ const MockCoffees = [
     title: 'Expresso Gelado',
     description: 'Café expresso tradicional com espuma cremosa',
     price: '9,90',
+    count: 0,
     image: gelado,
   },
   {
@@ -56,6 +61,7 @@ const MockCoffees = [
     title: 'Café com Leite',
     description: 'Café expresso tradicional com espuma cremosa',
     price: '9,90',
+    count: 0,
     image: leite,
   },
   {
@@ -65,6 +71,7 @@ const MockCoffees = [
     description:
       'Uma dose de café expresso com o dobro de leite e espuma cremosa',
     price: '9,90',
+    count: 0,
     image: latte,
   },
   {
@@ -74,6 +81,7 @@ const MockCoffees = [
     description:
       'Bebida com canela feita de doses iguais de café, leite e espuma',
     price: '9,90',
+    count: 0,
     image: capuccino,
   },
   {
@@ -83,6 +91,7 @@ const MockCoffees = [
     description:
       'Café expresso misturado com um pouco de leite quente e espuma',
     price: '9,90',
+    count: 0,
     image: macchiato,
   },
   {
@@ -91,6 +100,7 @@ const MockCoffees = [
     title: 'Mocaccino',
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
     price: '9,90',
+    count: 0,
     image: mochaccino,
   },
   {
@@ -99,6 +109,7 @@ const MockCoffees = [
     title: 'Chocolate Quente',
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
     price: '9,90',
+    count: 0,
     image: chocolateQuente,
   },
   {
@@ -108,6 +119,7 @@ const MockCoffees = [
     description:
       'Drink gelado de café expresso com rum, creme de leite e hortelã',
     price: '9,90',
+    count: 0,
     image: cubano,
   },
   {
@@ -116,6 +128,7 @@ const MockCoffees = [
     title: 'Havaiano',
     description: 'Bebida adocicada preparada com café e leite de coco',
     price: '9,90',
+    count: 0,
     image: havaiano,
   },
   {
@@ -124,6 +137,7 @@ const MockCoffees = [
     title: 'Árabe',
     description: 'Bebida preparada com grãos de café árabe e especiarias',
     price: '9,90',
+    count: 0,
     image: arabe,
   },
   {
@@ -132,14 +146,35 @@ const MockCoffees = [
     title: 'Irlandês',
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
     price: '9,90',
+    count: 0,
     image: irlandes,
   },
 ]
 
 export function Cards() {
+  const [coffees, setCoffees] = useState(MockCoffees)
+
+  function handleDecrement(id: string) {
+    setCoffees((prevCoffees) =>
+      prevCoffees.map((coffee) =>
+        coffee.id === id
+          ? { ...coffee, count: coffee.count <= 0 ? 0 : coffee.count - 1 }
+          : coffee,
+      ),
+    )
+  }
+
+  function handleIncrement(id: string) {
+    setCoffees((prevCoffees) =>
+      prevCoffees.map((coffee) =>
+        coffee.id === id ? { ...coffee, count: coffee.count + 1 } : coffee,
+      ),
+    )
+  }
+
   return (
     <>
-      {MockCoffees.map(({ id, taste, title, description, image, price }) => (
+      {coffees.map(({ id, taste, title, description, image, price, count }) => (
         <CardMenu key={id}>
           <img src={image} alt="Imagem demonstrativa do café" />
           <div className="taste">
@@ -153,11 +188,11 @@ export function Cards() {
             <span className="coin">R$</span>
             <span className="price">{price}</span>
             <div className="quantity">
-              <button>
+              <button onClick={() => handleDecrement(id)}>
                 <Minus weight="bold" size={14} />
               </button>
-              <p>1</p>
-              <button>
+              <p>{count}</p>
+              <button onClick={() => handleIncrement(id)}>
                 <Plus weight="bold" size={14} />
               </button>
             </div>

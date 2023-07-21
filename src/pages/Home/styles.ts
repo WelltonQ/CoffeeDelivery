@@ -10,10 +10,18 @@ export const Catalog = styled.div`
   h2 {
     margin: 40px 0;
   }
+
+  @media (max-width: 1160px) {
+    align-items: center;
+  }
 `
 export const CardsContainer = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 40px 25px;
+
+  @media (max-width: 1160px) {
+    justify-content: center;
+  }
 `
