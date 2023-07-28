@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ShoppingCart, Minus, Plus } from 'phosphor-react'
 
 import { CardMenu } from './styles'
@@ -17,6 +17,8 @@ import cubano from '../../assets/images/cubano.png'
 import havaiano from '../../assets/images/havaiano.png'
 import arabe from '../../assets/images/arabe.png'
 import irlandes from '../../assets/images/irlandes.png'
+
+import { useCartContext } from '../../contexts/CartContext'
 
 const MockCoffees = [
   {
@@ -153,6 +155,34 @@ const MockCoffees = [
 
 export function Cards() {
   const [coffees, setCoffees] = useState(MockCoffees)
+  const { handleItemsCart } = useCartContext()
+
+  // const quantityItemsInCart = coffees.map((coffee) => coffee.count)
+  // const objetosAlterados = coffees.filter((cafe) => cafe.count !== 0)
+
+  // const quantityItemsInCart = coffees.filter((cafe) => cafe.count !== 0)
+  // handleItemsCart(quantityItemsInCart)
+  // console.log(
+  //   '🚀 ~ file: index.tsx:164 ~ Cards ~ quantityItemsInCart:',
+  //   quantityItemsInCart,
+  // )
+  // console.log(objetosAlterados)
+  const quantityItemsInCart = coffees.filter((cafe) => cafe.count !== 0)
+  console.log(
+    '🚀 ~ file: index.tsx:171 ~ Cards ~ quantityItemsInCart:',
+    quantityItemsInCart,
+  )
+  // handleItemsCart(quantityItemsInCart)
+
+  // useEffect(() => {
+  //   if (coffees) {
+  //     handleItemsCart(quantityItemsInCart)
+  //   }
+  // }, [coffees, handleItemsCart])
+
+  // const handleSelectCart = useCallback(() => {
+  //   handleItemsCart(quantityItemsInCart)
+  // }, [handleItemsCart, quantityItemsInCart])
 
   function handleDecrement(id: string) {
     setCoffees((prevCoffees) =>

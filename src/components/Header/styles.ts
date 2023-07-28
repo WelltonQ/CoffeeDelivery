@@ -44,9 +44,27 @@ export const HeaderContainer = styled.div`
       background-color: ${(props) => props.theme['base-yellow-light']};
       cursor: pointer;
       border: none;
+      position: relative;
 
       svg {
         color: ${(props) => props.theme['base-yellow-dark']};
+      }
+
+      span {
+        background-color: ${(props) => props.theme['base-yellow-dark']};
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        position: absolute;
+        top: -7px;
+        right: -7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        padding-left: 1px;
       }
     }
   }
