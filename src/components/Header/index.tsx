@@ -8,7 +8,6 @@ import { useCartContext } from '../../contexts/CartContext'
 
 export function Header() {
   const { itemsCart } = useCartContext()
-  // console.log('🚀 ~ file: index.tsx:11 ~ Header ~ itemsCart:', itemsCart)
 
   return (
     <HeaderContainer>
@@ -18,7 +17,7 @@ export function Header() {
       <nav>
         <div className="location">
           <MapPin weight="fill" size={22} />
-          <span>Porto Alegre, RS</span>
+          <span>Natal, RN</span>
         </div>
         <Link to={'/checkout'} className="cart">
           <ShoppingCart weight="fill" size={22} />

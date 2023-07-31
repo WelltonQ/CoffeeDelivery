@@ -1,206 +1,26 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
 import { ShoppingCart, Minus, Plus } from 'phosphor-react'
 
 import { CardMenu } from './styles'
 
-import expresso from '../../assets/images/expresso.png'
-import americano from '../../assets/images/americano.png'
-import cremoso from '../../assets/images/expresso-cremoso.png'
-import gelado from '../../assets/images/cafe-gelado.png'
-import leite from '../../assets/images/cafe-com-leite.png'
-import latte from '../../assets/images/latte.png'
-import capuccino from '../../assets/images/capuccino.png'
-import macchiato from '../../assets/images/macchiato.png'
-import mochaccino from '../../assets/images/mochaccino.png'
-import chocolateQuente from '../../assets/images/chocolate-quente.png'
-import cubano from '../../assets/images/cubano.png'
-import havaiano from '../../assets/images/havaiano.png'
-import arabe from '../../assets/images/arabe.png'
-import irlandes from '../../assets/images/irlandes.png'
-
 import { useCartContext } from '../../contexts/CartContext'
-
-const MockCoffees = [
-  {
-    id: '1',
-    taste: ['Tradicional'],
-    title: 'Expresso Tradicional',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: '9,90',
-    count: 0,
-    image: expresso,
-  },
-  {
-    id: '2',
-    taste: ['Tradicional'],
-    title: 'Expresso Americano',
-    description: 'Expresso diluído, menos intenso que o tradicional',
-    price: '9,90',
-    count: 0,
-    image: americano,
-  },
-  {
-    id: '3',
-    taste: ['Tradicional'],
-    title: 'Expresso Cremoso',
-    description: 'Café expresso tradicional com espuma cremosa',
-    price: '9,90',
-    count: 0,
-    image: cremoso,
-  },
-  {
-    id: '4',
-    taste: ['Tradicional', 'Gelado'],
-    title: 'Expresso Gelado',
-    description: 'Café expresso tradicional com espuma cremosa',
-    price: '9,90',
-    count: 0,
-    image: gelado,
-  },
-  {
-    id: '5',
-    taste: ['Tradicional', 'Com leite'],
-    title: 'Café com Leite',
-    description: 'Café expresso tradicional com espuma cremosa',
-    price: '9,90',
-    count: 0,
-    image: leite,
-  },
-  {
-    id: '6',
-    taste: ['Tradicional', 'Com leite'],
-    title: 'Latte',
-    description:
-      'Uma dose de café expresso com o dobro de leite e espuma cremosa',
-    price: '9,90',
-    count: 0,
-    image: latte,
-  },
-  {
-    id: '7',
-    taste: ['Tradicional', 'Com leite'],
-    title: 'Capuccino',
-    description:
-      'Bebida com canela feita de doses iguais de café, leite e espuma',
-    price: '9,90',
-    count: 0,
-    image: capuccino,
-  },
-  {
-    id: '8',
-    taste: ['Tradicional', 'Com leite'],
-    title: 'Macchiato',
-    description:
-      'Café expresso misturado com um pouco de leite quente e espuma',
-    price: '9,90',
-    count: 0,
-    image: macchiato,
-  },
-  {
-    id: '9',
-    taste: ['Tradicional', 'Com leite'],
-    title: 'Mocaccino',
-    description: 'Café expresso com calda de chocolate, pouco leite e espuma',
-    price: '9,90',
-    count: 0,
-    image: mochaccino,
-  },
-  {
-    id: '10',
-    taste: ['Especial', 'Com leite'],
-    title: 'Chocolate Quente',
-    description: 'Bebida feita com chocolate dissolvido no leite quente e café',
-    price: '9,90',
-    count: 0,
-    image: chocolateQuente,
-  },
-  {
-    id: '11',
-    taste: ['Especial', 'Alcoólico', 'gelado'],
-    title: 'Cubano',
-    description:
-      'Drink gelado de café expresso com rum, creme de leite e hortelã',
-    price: '9,90',
-    count: 0,
-    image: cubano,
-  },
-  {
-    id: '12',
-    taste: ['Especial'],
-    title: 'Havaiano',
-    description: 'Bebida adocicada preparada com café e leite de coco',
-    price: '9,90',
-    count: 0,
-    image: havaiano,
-  },
-  {
-    id: '13',
-    taste: ['Especial'],
-    title: 'Árabe',
-    description: 'Bebida preparada com grãos de café árabe e especiarias',
-    price: '9,90',
-    count: 0,
-    image: arabe,
-  },
-  {
-    id: '14',
-    taste: ['Especial', 'Alcoólico'],
-    title: 'Irlandês',
-    description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
-    price: '9,90',
-    count: 0,
-    image: irlandes,
-  },
-]
+import { valueFormatedCurrency } from '../../utils/valuesFormated'
+import { useNavigate } from 'react-router-dom'
 
 export function Cards() {
-  const [coffees, setCoffees] = useState(MockCoffees)
-  const { handleItemsCart } = useCartContext()
+  const { handleItemsCart, handleDecrement, handleIncrement, coffees } =
+    useCartContext()
+  const navigate = useNavigate()
 
-  // const quantityItemsInCart = coffees.map((coffee) => coffee.count)
-  // const objetosAlterados = coffees.filter((cafe) => cafe.count !== 0)
-
-  // const quantityItemsInCart = coffees.filter((cafe) => cafe.count !== 0)
-  // handleItemsCart(quantityItemsInCart)
-  // console.log(
-  //   '🚀 ~ file: index.tsx:164 ~ Cards ~ quantityItemsInCart:',
-  //   quantityItemsInCart,
-  // )
-  // console.log(objetosAlterados)
-  const quantityItemsInCart = coffees.filter((cafe) => cafe.count !== 0)
-  console.log(
-    '🚀 ~ file: index.tsx:171 ~ Cards ~ quantityItemsInCart:',
-    quantityItemsInCart,
-  )
-  // handleItemsCart(quantityItemsInCart)
-
-  // useEffect(() => {
-  //   if (coffees) {
-  //     handleItemsCart(quantityItemsInCart)
-  //   }
-  // }, [coffees, handleItemsCart])
-
-  // const handleSelectCart = useCallback(() => {
-  //   handleItemsCart(quantityItemsInCart)
-  // }, [handleItemsCart, quantityItemsInCart])
-
-  function handleDecrement(id: string) {
-    setCoffees((prevCoffees) =>
-      prevCoffees.map((coffee) =>
-        coffee.id === id
-          ? { ...coffee, count: coffee.count <= 0 ? 0 : coffee.count - 1 }
-          : coffee,
-      ),
-    )
+  const updateItemsCart = () => {
+    const itemsWithCount = coffees.filter((coffee) => coffee.count > 0)
+    handleItemsCart(itemsWithCount)
   }
 
-  function handleIncrement(id: string) {
-    setCoffees((prevCoffees) =>
-      prevCoffees.map((coffee) =>
-        coffee.id === id ? { ...coffee, count: coffee.count + 1 } : coffee,
-      ),
-    )
-  }
+  useEffect(() => {
+    updateItemsCart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coffees])
 
   return (
     <>
@@ -216,7 +36,9 @@ export function Cards() {
           <p className="description">{description}</p>
           <div className="action">
             <span className="coin">R$</span>
-            <span className="price">{price}</span>
+            <span className="price">
+              {valueFormatedCurrency(price).replace('R$', '')}
+            </span>
             <div className="quantity">
               <button onClick={() => handleDecrement(id)}>
                 <Minus weight="bold" size={14} />
@@ -226,7 +48,10 @@ export function Cards() {
                 <Plus weight="bold" size={14} />
               </button>
             </div>
-            <button className="cart">
+            <button
+              onClick={() => navigate('/checkout')}
+              className={`cart ${count > 0 ? 'active' : ''}`}
+            >
               <ShoppingCart weight="fill" color="white" size={22} />
             </button>
           </div>

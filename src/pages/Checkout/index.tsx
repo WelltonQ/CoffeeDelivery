@@ -23,11 +23,22 @@ import {
   PaymentsMethods,
 } from './styles'
 
-import expresso from '../../assets/images/expresso.png'
-import americano from '../../assets/images/americano.png'
+import { useCartContext } from '../../contexts/CartContext'
+import { valueFormatedCurrency } from '../../utils/valuesFormated'
+import { Link } from 'react-router-dom'
 
 export function Checkout() {
   const [isSelected, setIsSelected] = useState('')
+  const { itemsCart, handleDecrement, handleIncrement, handleRemoveItem } =
+    useCartContext()
+
+  const pricesItems = itemsCart.map((item) => item.price)
+  const valueTotalItems = pricesItems.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0,
+  )
+  const delivery = 3.5
+  const valueTotal = valueTotalItems + delivery
 
   return (
     <CheckoutContainer>
@@ -95,71 +106,61 @@ export function Checkout() {
       <div>
         <h3>Cafés selecionados</h3>
         <CheckoutSummary>
-          <CardItem>
-            <img
-              src={expresso}
-              alt="Imagem demonstrativa de umas xícara de café"
-            />
-            <div className="alignElementsColumn">
-              <p>Expresso Tradicional</p>
-              <ItemContent>
-                <div className="quantity">
-                  <button>
-                    <Minus weight="bold" size={14} />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus weight="bold" size={14} />
-                  </button>
-                </div>
-                <button className="buttonRemove">
-                  <Trash size={16} /> Remover
-                </button>
-              </ItemContent>
-            </div>
-            <span>R$ 9,90</span>
-          </CardItem>
-          <CardItem>
-            <img
-              src={americano}
-              alt="Imagem demonstrativa de umas xícara de café"
-            />
-            <div className="alignElementsColumn">
-              <p>Expresso Americano</p>
-              <ItemContent>
-                <div className="quantity">
-                  <button>
-                    <Minus weight="bold" size={14} />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus weight="bold" size={14} />
-                  </button>
-                </div>
-                <button className="buttonRemove">
-                  <Trash size={16} /> Remover
-                </button>
-              </ItemContent>
-            </div>
-            <span>R$ 19,80</span>
-          </CardItem>
+          {itemsCart.length > 0 ? (
+            <>
+              {itemsCart.map(({ id, title, price, count, image }) => (
+                <CardItem key={id}>
+                  <img
+                    src={image}
+                    alt="Imagem demonstrativa de umas xícara de café"
+                  />
+                  <div className="alignElementsColumn">
+                    <p>{title}</p>
+                    <ItemContent>
+                      <div className="quantity">
+                        <button onClick={() => handleDecrement(id)}>
+                          <Minus weight="bold" size={14} />
+                        </button>
+                        <p>{count}</p>
+                        <button onClick={() => handleIncrement(id)}>
+                          <Plus weight="bold" size={14} />
+                        </button>
+                      </div>
+                      <button
+                        className="buttonRemove"
+                        onClick={() => handleRemoveItem(id)}
+                      >
+                        <Trash size={16} /> Remover
+                      </button>
+                    </ItemContent>
+                  </div>
+                  <span>{valueFormatedCurrency(price)}</span>
+                </CardItem>
+              ))}
 
-          <PaymentSumary>
-            <div>
-              <p>Total de itens</p>
-              <p>R$ 29,70</p>
-            </div>
-            <div>
-              <p>Entrega</p>
-              <p>R$ 3,50</p>
-            </div>
-            <div className="paymentTotal">
-              <p>Total</p>
-              <p>R$ 33,20</p>
-            </div>
-          </PaymentSumary>
+              <PaymentSumary>
+                <div>
+                  <p>Total de itens</p>
+                  <p>{valueFormatedCurrency(valueTotalItems)}</p>
+                </div>
+                <div>
+                  <p>Entrega</p>
+                  <p>{valueFormatedCurrency(delivery)}</p>
+                </div>
+                <div className="paymentTotal">
+                  <p>Total</p>
+                  <p>{valueFormatedCurrency(valueTotal)}</p>
+                </div>
+              </PaymentSumary>
 
-          <ButtonConfirmOrder>Confirmar pedido</ButtonConfirmOrder>
+              <ButtonConfirmOrder>Confirmar pedido</ButtonConfirmOrder>
+            </>
+          ) : (
+            <>
+              <h3>Não há cafés selecionados</h3>
+              <Link to="/">Volte para selecionar o café que deseja</Link>
+            </>
+          )}
         </CheckoutSummary>
       </div>
     </CheckoutContainer>

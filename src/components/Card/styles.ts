@@ -56,7 +56,6 @@ export const CardMenu = styled.div`
   .coin {
     color: ${(props) => props.theme['base-text']};
     font-size: 14px;
-    margin-right: 3px;
   }
 
   .price {
@@ -101,7 +100,7 @@ export const CardMenu = styled.div`
     justify-content: center;
     cursor: pointer;
 
-    &:hover {
+    &.active {
       background-color: ${(props) => props.theme['base-purple']};
     }
   }
