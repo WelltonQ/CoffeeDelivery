@@ -25,10 +25,11 @@ import {
 
 import { useCartContext } from '../../contexts/CartContext'
 import { valueFormatedCurrency } from '../../utils/valuesFormated'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export function Checkout() {
   const [isSelected, setIsSelected] = useState('')
+  const navigate = useNavigate()
   const { itemsCart, handleDecrement, handleIncrement, handleRemoveItem } =
     useCartContext()
 
@@ -153,7 +154,9 @@ export function Checkout() {
                 </div>
               </PaymentSumary>
 
-              <ButtonConfirmOrder>Confirmar pedido</ButtonConfirmOrder>
+              <ButtonConfirmOrder onClick={() => navigate('/success')}>
+                Confirmar pedido
+              </ButtonConfirmOrder>
             </>
           ) : (
             <>
