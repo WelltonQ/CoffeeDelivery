@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   MapPinLine,
   Minus,
@@ -28,12 +27,18 @@ import { valueFormatedCurrency } from '../../utils/valuesFormated'
 import { Link, useNavigate } from 'react-router-dom'
 
 export function Checkout() {
-  const [isSelected, setIsSelected] = useState('')
   const navigate = useNavigate()
-  const { itemsCart, handleDecrement, handleIncrement, handleRemoveItem } =
-    useCartContext()
+  const {
+    itemsCart,
+    isSelectedPayment,
+    handleDecrement,
+    handleIncrement,
+    handleRemoveItem,
+    handleSelectPaymentType,
+    handleChange,
+  } = useCartContext()
 
-  const pricesItems = itemsCart.map((item) => item.price)
+  const pricesItems = itemsCart.map((item) => item.price * item.count)
   const valueTotalItems = pricesItems.reduce(
     (accumulator, currentValue) => accumulator + currentValue,
     0,
@@ -54,18 +59,53 @@ export function Checkout() {
             </div>
           </div>
           <form>
-            <Input type="text" placeholder="CEP" />
-            <InputFill type="text" placeholder="Rua" />
+            <Input
+              type="text"
+              placeholder="CEP"
+              name="cep"
+              onChange={handleChange}
+            />
+            <InputFill
+              type="text"
+              placeholder="Rua"
+              name="street"
+              onChange={handleChange}
+            />
             <div className="alignRowInputs">
-              <Input type="text" placeholder="Número" />
+              <Input
+                type="text"
+                placeholder="Número"
+                name="number"
+                onChange={handleChange}
+              />
               <div className="inputWrapper">
-                <InputFill type="text" placeholder="Complemento" />
+                <InputFill
+                  type="text"
+                  placeholder="Complemento"
+                  name="complement"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="alignRowInputs">
-              <Input type="text" placeholder="Bairro" />
-              <InputFill type="text" placeholder="Cidade" />
-              <InputUF type="text" placeholder="UF" />
+              <Input
+                type="text"
+                placeholder="Bairro"
+                name="district"
+                onChange={handleChange}
+              />
+              <InputFill
+                type="text"
+                placeholder="Cidade"
+                name="city"
+                onChange={handleChange}
+              />
+              <InputUF
+                type="text"
+                placeholder="UF"
+                name="uf"
+                onChange={handleChange}
+              />
             </div>
           </form>
         </CheckoutContent>
@@ -81,22 +121,22 @@ export function Checkout() {
           </div>
           <PaymentsMethods>
             <button
-              className={isSelected === 'credit' ? 'selected' : ''}
-              onClick={() => setIsSelected('credit')}
+              className={isSelectedPayment === 'credit' ? 'selected' : ''}
+              onClick={() => handleSelectPaymentType('credit')}
             >
               <CreditCard size={20} />
               Cartão de Crédito
             </button>
             <button
-              className={isSelected === 'debit' ? 'selected' : ''}
-              onClick={() => setIsSelected('debit')}
+              className={isSelectedPayment === 'debit' ? 'selected' : ''}
+              onClick={() => handleSelectPaymentType('debit')}
             >
               <Bank size={20} />
               Cartão de Débito
             </button>
             <button
-              className={isSelected === 'money' ? 'selected' : ''}
-              onClick={() => setIsSelected('money')}
+              className={isSelectedPayment === 'money' ? 'selected' : ''}
+              onClick={() => handleSelectPaymentType('money')}
             >
               <Money size={20} />
               Dinheiro
@@ -135,7 +175,7 @@ export function Checkout() {
                       </button>
                     </ItemContent>
                   </div>
-                  <span>{valueFormatedCurrency(price)}</span>
+                  <span>{valueFormatedCurrency(price * count)}</span>
                 </CardItem>
               ))}
 

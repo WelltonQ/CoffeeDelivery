@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  ChangeEvent,
+} from 'react'
 
 import expresso from '../assets/images/expresso.png'
 import americano from '../assets/images/americano.png'
@@ -25,14 +31,30 @@ interface ItemsCartType {
   title: string
 }
 
+interface ValuesAddressProps {
+  cep: string
+  city: string
+  complement: string
+  district: string
+  number: string
+  street: string
+  uf: string
+}
+
 interface CartContextType {
   itemsCart: ItemsCartType[]
   setItemsCart: any
   coffees: ItemsCartType[]
+  isSelectedPayment: string
+  valuesAddress: ValuesAddressProps
   handleItemsCart: (items: ItemsCartType[]) => void
   handleDecrement: (id: string) => void
   handleIncrement: (id: string) => void
   handleRemoveItem: (id: string) => void
+  handleSelectPaymentType: (payment: string) => void
+  handleChange: (
+    value: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => void
 }
 
 interface CartContextProviderProps {
@@ -177,13 +199,23 @@ const MockCoffees = [
 function CartContextProvider({ children }: CartContextProviderProps) {
   const [itemsCart, setItemsCart] = useState<ItemsCartType[]>([])
   const [coffees, setCoffees] = useState(MockCoffees)
-  console.log(
-    '🚀 ~ file: CartContext.tsx:27 ~ CartContextProvider ~ itemsCart:',
-    itemsCart,
-  )
+  const [isSelectedPayment, setIsSelectedPayment] = useState('')
+  const [valuesAddress, setValuesAddress] = useState<ValuesAddressProps>({
+    cep: '',
+    city: '',
+    complement: '',
+    district: '',
+    number: '',
+    street: '',
+    uf: '',
+  })
 
   function handleItemsCart(items: ItemsCartType[]) {
     setItemsCart(items)
+  }
+
+  function handleSelectPaymentType(payment: string) {
+    setIsSelectedPayment(payment)
   }
 
   function handleDecrement(id: string) {
@@ -228,16 +260,30 @@ function CartContextProvider({ children }: CartContextProviderProps) {
     setItemsCart(updatedCoffeesCheckout)
   }
 
+  function handleChange(
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) {
+    const { name, value } = event.target
+    setValuesAddress((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }))
+  }
+
   return (
     <CartStateContext.Provider
       value={{
         itemsCart,
         coffees,
+        isSelectedPayment,
+        valuesAddress,
         handleItemsCart,
         setItemsCart,
         handleDecrement,
         handleIncrement,
         handleRemoveItem,
+        handleSelectPaymentType,
+        handleChange,
       }}
     >
       {children}

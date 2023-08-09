@@ -9,10 +9,21 @@ export const ContainerSuccess = styled.div`
   margin: 0 auto;
   padding: 20px 20px 40px;
 
-  h1 {
-    color: ${(props) => props.theme['base-yellow-dark']};
-    margin-bottom: 10px;
+  div {
+    width: 100%;
+
+    h1 {
+      color: ${(props) => props.theme['base-yellow-dark']};
+      margin-bottom: 10px;
+    }
   }
+`
+
+export const ContentSuccess = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 
   .summary {
     width: 526px;
