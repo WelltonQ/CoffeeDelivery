@@ -52,6 +52,10 @@ export function Checkout() {
       return alert('Selecione a forma de pagamento')
     }
     for (const key in valuesAddress) {
+      console.log(
+        '🚀 ~ file: index.tsx:55 ~ handleOnSubmit ~ valuesAddress:',
+        valuesAddress[key],
+      )
       if (valuesAddress[key].trim() === '') {
         return alert('Preencha todos os campos no endereço')
       }

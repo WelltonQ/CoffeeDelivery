@@ -39,6 +39,7 @@ interface ValuesAddressProps {
   number: string
   street: string
   uf: string
+  [key: string]: string
 }
 
 interface CartContextType {
