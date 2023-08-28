@@ -22,6 +22,10 @@ export function Cards() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coffees])
 
+  function handleOnSubmit() {
+    navigate('/checkout')
+  }
+
   return (
     <>
       {coffees.map(({ id, taste, title, description, image, price, count }) => (
@@ -49,7 +53,7 @@ export function Cards() {
               </button>
             </div>
             <button
-              onClick={() => navigate('/checkout')}
+              onClick={() => handleOnSubmit()}
               className={`cart ${count > 0 ? 'active' : ''}`}
             >
               <ShoppingCart weight="fill" color="white" size={22} />

@@ -2,10 +2,29 @@ import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { IconContainer } from '../../components/Banner/styles'
 import { ContainerSuccess, ContentSuccess } from './styles'
 import Illustration from '../../assets/images/Illustration.png'
-import { useCartContext } from '../../contexts/CartContext'
+import { useEffect, useState } from 'react'
+
+interface AddressType {
+  cep: string
+  city: string
+  complement: string
+  district: string
+  number: string
+  street: string
+  uf: string
+}
 
 export function Success() {
-  const { valuesAddress, isSelectedPayment } = useCartContext()
+  const [address, setAddress] = useState({} as AddressType)
+  const [methodPayment, setMethodPayment] = useState<string>('')
+
+  useEffect(() => {
+    const addressValues = localStorage.getItem('address')
+    const methodPaymentValues = localStorage.getItem('methodPayment')
+
+    setAddress(JSON.parse(addressValues as string))
+    setMethodPayment(JSON.parse(methodPaymentValues as string))
+  }, [])
 
   return (
     <ContainerSuccess>
@@ -21,11 +40,10 @@ export function Success() {
               <p>
                 Entrega em{' '}
                 <b>
-                  {valuesAddress.street}, {valuesAddress.number}
+                  {address.street}, {address.number}
                 </b>{' '}
                 <br />
-                {valuesAddress.district} - {valuesAddress.city},{' '}
-                {valuesAddress.uf}
+                {address.district} - {address.city}, {address.uf}
               </p>
             </IconContainer>
             <IconContainer variant="base-yellow">
@@ -43,9 +61,9 @@ export function Success() {
               </div>
               <p>
                 Pagamento na entrega <br />
-                <b>{isSelectedPayment === 'credit' && 'Cartão de Crédito'}</b>
-                <b>{isSelectedPayment === 'debit' && 'Cartão de Débito'}</b>
-                <b>{isSelectedPayment === 'money' && 'Dinheiro'}</b>
+                <b>{methodPayment === 'credit' && 'Cartão de Crédito'}</b>
+                <b>{methodPayment === 'debit' && 'Cartão de Débito'}</b>
+                <b>{methodPayment === 'money' && 'Dinheiro'}</b>
               </p>
             </IconContainer>
           </div>

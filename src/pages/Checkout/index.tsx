@@ -30,6 +30,7 @@ export function Checkout() {
   const navigate = useNavigate()
   const {
     itemsCart,
+    valuesAddress,
     isSelectedPayment,
     handleDecrement,
     handleIncrement,
@@ -45,6 +46,21 @@ export function Checkout() {
   )
   const delivery = 3.5
   const valueTotal = valueTotalItems + delivery
+
+  function handleOnSubmit() {
+    if (isSelectedPayment === '') {
+      return alert('Selecione a forma de pagamento')
+    }
+    for (const key in valuesAddress) {
+      if (valuesAddress[key].trim() === '') {
+        return alert('Preencha todos os campos no endereço')
+      }
+    }
+    localStorage.setItem('address', JSON.stringify(valuesAddress))
+    localStorage.setItem('methodPayment', JSON.stringify(isSelectedPayment))
+
+    navigate('/success')
+  }
 
   return (
     <CheckoutContainer>
@@ -194,7 +210,7 @@ export function Checkout() {
                 </div>
               </PaymentSumary>
 
-              <ButtonConfirmOrder onClick={() => navigate('/success')}>
+              <ButtonConfirmOrder onClick={() => handleOnSubmit()}>
                 Confirmar pedido
               </ButtonConfirmOrder>
             </>

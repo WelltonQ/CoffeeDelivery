@@ -27,11 +27,11 @@ export const ContentSuccess = styled.div`
 
   .summary {
     width: 526px;
+    /* border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to left, #8047f8, #dbac2c) 1; */
     border: 1px solid #dbac2c;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 36px;
-    border-bottom-left-radius: 36px;
-    border-bottom-right-radius: 6px;
+    border-radius: 6px 36px 6px 36px;
     padding: 40px;
     margin-top: 40px;
   }

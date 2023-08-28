@@ -21,7 +21,7 @@ import havaiano from '../assets/images/havaiano.png'
 import arabe from '../assets/images/arabe.png'
 import irlandes from '../assets/images/irlandes.png'
 
-interface ItemsCartType {
+export interface ItemsCartType {
   count: number
   description: string
   id: string
