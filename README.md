@@ -23,7 +23,7 @@ O desafio proposto consiste em criar uma aplicação para gerenciar um carrinho 
 - Exibir o valor total da soma de itens no carrinho multiplicados pelo valor. 
 
 ## 🌍 Acesse pelo navegador
-- 
+- https://project-coffee-delivery.vercel.app
 
 ## 🛠 Tecnologias
 
