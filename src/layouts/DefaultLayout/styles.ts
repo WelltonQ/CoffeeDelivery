@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background-color: green;
+  /* max-width: 1120px; */
 `
